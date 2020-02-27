@@ -7,8 +7,6 @@ import random
 import argparse
 import pickle
 import torch
-import torch.nn as nn
-import torch.optim as optim
 
 from data.loader import DataLoader
 from model.rnn import RelationModel
