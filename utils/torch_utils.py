@@ -3,7 +3,6 @@ Utility functions for torch.
 """
 
 import torch
-from torch import nn, optim
 from torch.optim import Optimizer
 
 ### class
