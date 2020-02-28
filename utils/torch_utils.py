@@ -132,36 +132,40 @@ def keep_partial_grad(grad, topk):
     return grad
 
 
-### model IO
+# saving and loading model
+# https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-a-general-checkpoint-for-inference-and-or-resuming-training
 def save(model, optimizer, opt, filename):
-    params = {
+    model_params = {
         'model': model.state_dict(),
         'optimizer': optimizer.state_dict(),
         'config': opt
     }
     try:
-        torch.save(params, filename)
+        torch.save(model_params, filename)
     except BaseException:
         print("[ Warning: model saving failed. ]")
 
 
 def load(model, optimizer, filename):
     try:
-        dump = torch.load(filename)
+        model_params = torch.load(filename)
     except BaseException:
         print("[ Fail: model loading failed. ]")
+
     if model is not None:
-        model.load_state_dict(dump['model'])
+        model.load_state_dict(model_params['model'])
     if optimizer is not None:
-        optimizer.load_state_dict(dump['optimizer'])
-    opt = dump['config']
+        optimizer.load_state_dict(model_params['optimizer'])
+    opt = model_params['config']
+
     return model, optimizer, opt
 
 
 def load_config(filename):
     try:
-        dump = torch.load(filename)
+        model_param = torch.load(filename)
     except BaseException:
         print("[ Fail: model loading failed. ]")
-    return dump['config']
+
+    return model_param['config']
 
