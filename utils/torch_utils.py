@@ -88,7 +88,8 @@ class MyAdagrad(Optimizer):
 
         return loss
 
-### torch specific functions
+
+# torch specific functions
 def get_optimizer(name, parameters, lr):
     if name == 'sgd':
         return torch.optim.SGD(parameters, lr=lr)
@@ -102,9 +103,11 @@ def get_optimizer(name, parameters, lr):
     else:
         raise Exception("Unsupported optimizer: {}".format(name))
 
+
 def change_lr(optimizer, new_lr):
     for param_group in optimizer.param_groups:
         param_group['lr'] = new_lr
+
 
 def flatten_indices(seq_lens, width):
     flat = []
@@ -113,10 +116,12 @@ def flatten_indices(seq_lens, width):
             flat.append(i * width + j)
     return flat
 
+
 def set_cuda(var, cuda):
     if cuda:
         return var.cuda()
     return var
+
 
 def keep_partial_grad(grad, topk):
     """
@@ -125,6 +130,7 @@ def keep_partial_grad(grad, topk):
     assert topk < grad.size(0)
     grad.data[topk:].zero_()
     return grad
+
 
 ### model IO
 def save(model, optimizer, opt, filename):
@@ -138,6 +144,7 @@ def save(model, optimizer, opt, filename):
     except BaseException:
         print("[ Warning: model saving failed. ]")
 
+
 def load(model, optimizer, filename):
     try:
         dump = torch.load(filename)
@@ -149,6 +156,7 @@ def load(model, optimizer, filename):
         optimizer.load_state_dict(dump['optimizer'])
     opt = dump['config']
     return model, optimizer, opt
+
 
 def load_config(filename):
     try:
