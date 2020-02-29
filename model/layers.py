@@ -3,10 +3,9 @@ Additional layers.
 """
 import torch
 from torch import nn
-from torch.nn import init
 import torch.nn.functional as F
 
-from utils import constant, torch_utils
+from utils import constant
 
 class LSTMLayer(nn.Module):
     """ A wrapper for LSTM with sequence packing. """
