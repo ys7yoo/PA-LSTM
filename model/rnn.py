@@ -10,6 +10,7 @@ import torch.nn.functional as F
 from utils import constant, torch_utils
 from model import layers
 
+
 class RelationModel(object):
     """ A wrapper class for the training and evaluation of models. """
     def __init__(self, opt, emb_matrix=None):
@@ -89,6 +90,7 @@ class RelationModel(object):
             exit()
         self.model.load_state_dict(checkpoint['model'])
         self.opt = checkpoint['config']
+
 
 class PositionAwareRNN(nn.Module):
     """ A sequence model for relation extraction. """
@@ -191,5 +193,3 @@ class PositionAwareRNN(nn.Module):
 
         logits = self.linear(final_hidden)
         return logits, final_hidden
-    
-

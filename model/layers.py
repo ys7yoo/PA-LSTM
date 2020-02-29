@@ -7,6 +7,7 @@ import torch.nn.functional as F
 
 from utils import constant
 
+
 class LSTMLayer(nn.Module):
     """ A wrapper for LSTM with sequence packing. """
 
@@ -37,6 +38,7 @@ class LSTMLayer(nn.Module):
         ht = ht.index_select(0, idx_unsort)
         ct = ct.index_select(0, idx_unsort)
         return rnn_output, (ht, ct)
+
 
 class PositionAwareAttention(nn.Module):
     """
@@ -95,4 +97,3 @@ class PositionAwareAttention(nn.Module):
         # weighted average input vectors
         outputs = weights.unsqueeze(1).bmm(x).squeeze(1)
         return outputs
-
