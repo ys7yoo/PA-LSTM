@@ -13,6 +13,7 @@ from utils import constant
 random.seed(1234)
 np.random.seed(1234)
 
+
 def build_embedding(wv_file, vocab, wv_dim):
     vocab_size = len(vocab)
     emb = np.random.uniform(-1, 1, (vocab_size, wv_dim))
@@ -27,6 +28,7 @@ def build_embedding(wv_file, vocab, wv_dim):
                 emb[w2id[token]] = [float(v) for v in elems[-wv_dim:]]
     return emb
 
+
 def load_glove_vocab(file, wv_dim):
     """
     Load all words from glove.
@@ -39,6 +41,7 @@ def load_glove_vocab(file, wv_dim):
             vocab.add(token)
     return vocab
 
+
 def normalize_glove(token):
     mapping = {'-LRB-': '(',
                 '-RRB-': ')',
@@ -49,6 +52,7 @@ def normalize_glove(token):
     if token in mapping:
         token = mapping[token]
     return token
+
 
 class Vocab(object):
     def __init__(self, filename, load=False, word_counter=None, threshold=0):
